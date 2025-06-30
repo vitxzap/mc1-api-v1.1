@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model tb_host {
+  id_host           Int                @id @default(autoincrement())
+  nm_host           String?            @db.VarChar(100)
+  id_cloud_provider Int?
+  tb_cloud_provider tb_cloud_provider? @relation(fields: [id_cloud_provider], references: [id_cloud_provider], onDelete: NoAction, onUpdate: NoAction, map: "tb_host_ibfk_1")
+
+  @@index([id_cloud_provider], map: "id_cloud_provider")
+}
+
+model tb_server {
+  id_server Int         @id @default(autoincrement())
+  nm_server String      @db.VarChar(100)
+  id_host   Int?
+  tb_client tb_client[]
+
+  @@index([id_host], map: "id_host")
+}
+
+model tb_client {
+  id_client   Int        @id @default(autoincrement())
+  nm_client   String     @db.VarChar(50)
+  num_project Int
+  id_server   Int?
+  tb_alert    tb_alert[]
+  tb_server   tb_server? @relation(fields: [id_server], references: [id_server], onDelete: NoAction, onUpdate: NoAction, map: "tb_client_ibfk_2")
+
+  @@index([id_server], map: "id_server")
+}
+
+model tb_cloud_provider {
+  id_cloud_provider Int       @id @default(autoincrement())
+  nm_cloud_provider String?   @db.VarChar(30)
+  tb_host           tb_host[]
+}
+
+model tb_user {
+  id_user    Int        @id @default(autoincrement())
+  nm_user    String?    @db.VarChar(200)
+  user_email String?    @db.VarChar(500)
+  dt_created DateTime?  @db.Date
+  tb_alert   tb_alert[]
+}
+
+model tb_alert {
+  id_alert    Int        @id @default(autoincrement())
+  nm_alert    String?    @db.VarChar(150)
+  desc_alert  String?    @db.VarChar(700)
+  query_alert String?    @db.VarChar(6000)
+  id_client   Int?
+  id_user     Int?
+  dt_created  DateTime?  @db.Date
+  tb_client   tb_client? @relation(fields: [id_client], references: [id_client], onDelete: NoAction, onUpdate: NoAction, map: "tb_alert_ibfk_1")
+  tb_user     tb_user?   @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction, map: "tb_alert_ibfk_2")
+
+  @@index([id_client], map: "id_client")
+  @@index([id_user], map: "id_user")
+}
