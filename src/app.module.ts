@@ -12,7 +12,7 @@ import { prismaManipulationClient } from './repositories/prisma/prisma-client.re
 import { alertController } from './controllers/alert.controller';
 import { manipulateAlert } from './repositories/alert.repository';
 import { prismaManipulationAlert } from './repositories/prisma/prisma-alert.repository';
-import { minutes, seconds, ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { minutes, ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 
 @Module({
