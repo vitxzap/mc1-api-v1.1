@@ -6,7 +6,7 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - .:/app
+      - .:/usr/src/app
     environment:
       - ./.env
     command: npm run start:dev
