@@ -6,7 +6,9 @@ export abstract class manipulateAlert {
     clientId: number,
     alertName: string,
     alertDescription: string,
-    alertQuery: string): Promise<void>;
+    alertQuery: string,
+    alertLink: string,
+  ): Promise<void>;
     
   abstract get(): Promise<string | object>;
 }

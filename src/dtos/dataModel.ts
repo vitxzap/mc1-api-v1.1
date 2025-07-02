@@ -19,7 +19,7 @@ export class PostAlertModel {
   alertDescription: string;
 
   alertQuery: string;
-
+  alertLink: string;
   @IsNotEmpty()
   @IsPositive({
     message: "This Client ID does not exist."

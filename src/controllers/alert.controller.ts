@@ -11,12 +11,13 @@ export class alertController {
   @Post()
   async postAlert(@Body() body: PostAlertModel) {
     try {
-      const { clientId, alertName, alertDescription, alertQuery } = body;
+      const { clientId, alertName, alertDescription, alertQuery, alertLink } = body;
       await this.manipulateAlert.post(
         clientId,
         alertName,
         alertDescription,
         alertQuery,
+        alertLink,
       );
     } catch (err) {
       return err

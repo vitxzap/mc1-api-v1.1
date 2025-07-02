@@ -10,15 +10,19 @@ export class prismaManipulationAlert implements manipulateAlert {
     alertName: string,
     alertDescription: string,
     alertQuery: string,
+    alertLink: string,
   ): Promise<void> {
     try {
       if (clientId && alertName) {
+        const createdAt = new Date();
         await this.prisma.tb_alert.create({
           data: {
             id_client: clientId,
             nm_alert: alertName,
             desc_alert: alertDescription,
             query_alert: alertQuery,
+            link_alert: alertLink,
+            dt_created: createdAt,
           },
         });
       }
