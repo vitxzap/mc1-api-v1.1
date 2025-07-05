@@ -25,12 +25,11 @@ export class prismaManipulationAlert implements manipulateAlert {
             dt_created: createdAt,
           },
         });
-      }
-      else{
-        throw new Error("Something went wrong.")
+      } else {
+        throw new Error('Something went wrong.');
       }
     } catch (e) {
-      return e
+      return e;
     }
   }
   async get(): Promise<string | object> {
@@ -38,8 +37,16 @@ export class prismaManipulationAlert implements manipulateAlert {
       const c = await this.prisma.tb_alert.findMany({
         include: {
           tb_client: {
-            select: {
-              nm_client: true,
+            include: {
+              tb_server: {
+                include: {
+                  tb_host: {
+                    include: {
+                      tb_cloud_provider: {},
+                    },
+                  },
+                },
+              },
             },
           },
         },

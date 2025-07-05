@@ -11,6 +11,7 @@ datasource db {
 model tb_host {
   id_host           Int                @id @default(autoincrement())
   nm_host           String?            @db.VarChar(100)
+  tb_server         tb_server[]
   id_cloud_provider Int?
   tb_cloud_provider tb_cloud_provider? @relation(fields: [id_cloud_provider], references: [id_cloud_provider], onDelete: NoAction, onUpdate: NoAction, map: "tb_host_ibfk_1")
 
@@ -22,7 +23,7 @@ model tb_server {
   nm_server String      @db.VarChar(100)
   id_host   Int?
   tb_client tb_client[]
-
+  tb_host     tb_host?    @relation(fields: [id_host], references: [id_host], onDelete: NoAction, onUpdate: NoAction, map: "tb_server_ibfk_1")
   @@index([id_host], map: "id_host")
 }
 
