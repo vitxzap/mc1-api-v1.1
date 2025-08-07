@@ -5,6 +5,9 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class prismaManipulationAlert implements manipulateAlert {
   constructor(private prisma: PrismaService) {}
+  async delete(): Promise<void> {
+    
+  }
   async post(
     clientId: number,
     alertName: string,
@@ -56,4 +59,5 @@ export class prismaManipulationAlert implements manipulateAlert {
       return err.message;
     }
   }
+  asy
 }

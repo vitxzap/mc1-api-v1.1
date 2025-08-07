@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Delete } from '@nestjs/common';
 import { GetAlertModel, PostAlertModel } from 'src/dtos/dataModel';
 import { manipulateAlert } from 'src/repositories/alert.repository';
 import { UseGuards } from '@nestjs/common';
@@ -28,5 +28,11 @@ export class alertController {
   async getAlert() {
     const response = await this.manipulateAlert.get();
     return response;
+  }
+
+  @Delete()
+  async deleteAlert() {
+    const idAlert = 
+    return 
   }
 }

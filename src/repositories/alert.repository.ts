@@ -11,4 +11,5 @@ export abstract class manipulateAlert {
   ): Promise<void>;
     
   abstract get(): Promise<string | object>;
+  abstract delete(): Promise<void>;
 }
