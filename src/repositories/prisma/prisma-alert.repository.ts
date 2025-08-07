@@ -26,7 +26,7 @@ export class prismaManipulationAlert implements manipulateAlert {
           },
         });
       } else {
-        throw new Error('Something went wrong.');
+        throw new Error('There should be something wrong with the data you provided. Please, verify it.');
       }
     } catch (e) {
       return e;
