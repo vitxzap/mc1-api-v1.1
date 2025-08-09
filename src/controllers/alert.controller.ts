@@ -1,5 +1,17 @@
-import { Body, Controller, Get, Post, Delete } from '@nestjs/common';
-import { GetAlertModel, PostAlertModel } from 'src/dtos/dataModel';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Query,
+  HttpCode,
+} from '@nestjs/common';
+import {
+  deleteAlertModel,
+  GetAlertModel,
+  PostAlertModel,
+} from 'src/dtos/dataModel';
 import { manipulateAlert } from 'src/repositories/alert.repository';
 import { UseGuards } from '@nestjs/common';
 import { ThrottlerGuard } from '@nestjs/throttler';
@@ -10,18 +22,15 @@ export class alertController {
   constructor(private manipulateAlert: manipulateAlert) {}
   @Post()
   async postAlert(@Body() body: PostAlertModel) {
-    try {
-      const { clientId, alertName, alertDescription, alertQuery, alertLink } = body;
-      await this.manipulateAlert.post(
-        clientId,
-        alertName,
-        alertDescription,
-        alertQuery,
-        alertLink,
-      );
-    } catch (err) {
-      return err
-    }
+    const { clientId, alertName, alertDescription, alertQuery, alertLink } =
+      body;
+    await this.manipulateAlert.post(
+      clientId,
+      alertName,
+      alertDescription,
+      alertQuery,
+      alertLink,
+    );
   }
 
   @Get()
@@ -31,8 +40,7 @@ export class alertController {
   }
 
   @Delete()
-  async deleteAlert() {
-    const idAlert = 
-    return 
+  async deleteAlert(@Query() { alertId }: deleteAlertModel) {
+    const c = await this.manipulateAlert.delete(alertId);
   }
 }

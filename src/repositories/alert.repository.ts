@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-
+import { deleteAlertModel } from 'src/dtos/dataModel';
 @Injectable()
 export abstract class manipulateAlert {
   abstract post(
@@ -8,8 +8,8 @@ export abstract class manipulateAlert {
     alertDescription: string,
     alertQuery: string,
     alertLink: string,
-  ): Promise<void>;
+  ): Promise<void | object>;
     
-  abstract get(): Promise<string | object>;
-  abstract delete(): Promise<void>;
+  abstract get(): Promise<object>;
+  abstract delete(alertId: number): Promise<void | object >;
 }

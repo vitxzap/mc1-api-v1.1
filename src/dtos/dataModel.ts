@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsPositive } from "class-validator";
+import { IsInt, IsNotEmpty, IsPositive } from "class-validator";
 export class GetHostModel {
   id: number;
 }
@@ -25,6 +25,11 @@ export class PostAlertModel {
     message: "This Client ID does not exist."
   })
   clientId: number;
+}
+
+export class deleteAlertModel {
+  @IsNotEmpty()
+  alertId: number;
 }
 
 export class GetClientModel {
